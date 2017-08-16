@@ -41,6 +41,9 @@ class Student:
         for task_test in number_of_test:
             self.test_results[test_number - 1] = 1
 
+    def total_rank:
+        pass
+
 
 
 
