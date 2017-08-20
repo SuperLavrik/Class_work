@@ -13,15 +13,23 @@ class Student(Person):
         self.hw_results = [0] * Student.NUMBER_OF_TASKS
         self.test_results = [0] * Student.NUMBER_OF_TESTS
 
-    def print_info(self):
+    # def print_info(self):
         # print('================================')
         # print('Name:', self.name)
         # print('Age:', self.age)
-        super().print_info()
+        # super().print_info()
+        # print('H/w results:', self.hw_results)
+        # print('Test result:', self.test_results)
+        # print('Total rank:', self.total_rank())
+        # print('================================')
+
+    def print_info_ext(self):
         print('H/w results:', self.hw_results)
         print('Test result:', self.test_results)
         print('Total rank:', self.total_rank())
-        print('================================')
+
+
+
 
     def accept_task(self, *number_of_tasks):
         for task_number in number_of_tasks:
