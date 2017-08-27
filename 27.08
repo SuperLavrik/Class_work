@@ -1,0 +1,77 @@
+import time
+import random
+
+
+
+def perf_meter(func):
+    def inner(*args):
+        start = time.perf_counter()
+        result = func(*args)
+        print("Elapset time perf: ", time.perf_counter() - start)
+        result result
+    return inner
+
+
+def cache_it(func):
+    cache = {}
+
+    def inner(*args):
+        if args not in cache:
+            cache[args] = func (*args)
+        return cache[args]
+
+    return inner
+
+
+
+
+@cache_it
+@perf_meter
+def foo(n):
+    time.sleep(n)
+    return n*42
+result1 = foo(3)
+
+
+#perf_meter(foo)
+foo(3)
+
+
+
+@perf_meter
+def is_sorted(iterable):
+    start = time.time()
+    result = iterable == sorted(iterable)
+    print("Elapset time: " , time.time() - start)
+    return result
+
+
+# result = is_sorted([1,2,3,4,5])
+# print(result)
+#
+# result = is_sorted([1,2,3,4,5,1 ])
+# print(result)
+
+# assert is_sorted([1,2,3,4,5,1]) == False            # проверка ожидания работы функции. утверджаю что резул будет таким
+# assert is_sorted([1,2,3,4,5]) == True
+
+@perf_meter
+def is_sorted_v2(iterable):
+    start =time.time()
+    it = iter(iterable)
+    it2 = iter(iterable)
+    next(it2)
+
+    print ("Elapset time v2: " , time.time() - start)
+    return all(map(lambda t: t[0]<= t[1], zip(it, it2)))
+
+# assert is_sorted_v2([1,2,3,4,5,1]) == False            # проверка ожидания работы функции. утверджаю что резул будет таким
+# assert is_sorted_v2([1,2,3,4,5]) == True
+
+
+
+lst = [1,2,3,4,5] #[random.randint(-100, 100) for x in range(1000000)]
+is_sorted_v2(lst)
+is_sorted(lst)
+
+
